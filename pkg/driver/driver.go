@@ -20,7 +20,7 @@ type Driver struct {
 
 const (
 	Version       = "v1.0.0"
-	DriverName    = "minio.s3.csi.xw.com"
+	DriverName    = "minio.s3.csi.mlops.com"
 	DevicePathKey = "devicePath"
 )
 

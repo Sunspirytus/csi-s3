@@ -73,3 +73,21 @@ func (m *MinioClient) CreateDir(path string) error {
 	}
 	return nil
 }
+
+func (m *MinioClient) DeleteDir(path string) error {
+	objectCh := m.client.ListObjects(m.ctx, m.bucketName, minio.ListObjectsOptions{
+		Prefix:    path,
+		Recursive: true,
+	})
+
+	errs := m.client.RemoveObjects(m.ctx, m.bucketName, objectCh, minio.RemoveObjectsOptions{})
+	for object := range errs {
+		if object.Err != nil {
+			println(object.Err)
+			klog.V(4).Infof("failed to remove object: %s", object.Err)
+		}
+	}
+
+	klog.V(4).Infof("Successfully removed all objects with prefix %s", path)
+	return nil
+}

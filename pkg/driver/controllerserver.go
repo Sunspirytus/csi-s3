@@ -73,6 +73,25 @@ func (c *ControllerServer) CreateVolume(ctx context.Context, req *csi.CreateVolu
 // 删除Volume
 func (c *ControllerServer) DeleteVolume(ctx context.Context, req *csi.DeleteVolumeRequest) (*csi.DeleteVolumeResponse, error) {
 	klog.V(4).Infof("DeleteVolume: called with args: %+v", *req)
+
+	// 检查必要的请求参数
+	//if len(req.GetVolumeId()) == 0 {
+	//	return nil, status.Error(codes.InvalidArgument, "missing required parameters")
+	//}
+	//
+	//// 获取 volumeAttributes
+	//volumeContext := req.GetSecrets()
+	//if volumeContext != nil {
+	//	for key, value := range volumeContext {
+	//		fmt.Printf("Volume attribute: %s=%s\n", key, value)
+	//		// 在这里处理你的 volumeAttributes
+	//	}
+	//}
+
+	//client := s3.NewClient()
+	//
+	//client.DeleteDir(req.GetVolumeId())
+
 	return &csi.DeleteVolumeResponse{}, nil
 }
 
